@@ -3,7 +3,7 @@ TARGET = testgtk
 CONFIG = c++11 link_pkgconfig
 PKGCONFIG = gtk+-3.0
 DEFINES = GTK
-INCLUDEPATH = /home/hotnuma/DevFiles/scintilla/include
+INCLUDEPATH = /usr/local/include/scintilla
 
 HEADERS += \
 #    MainWindow.h \

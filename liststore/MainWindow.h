@@ -21,8 +21,8 @@ private:
     void _createWindow();
     GtkWidget* _createListView();
 
-    SIGNAL_MAP1(MainWindow*, void, _onDestroy, GtkWidget*)
-    SIGNAL_MAP1(MainWindow*, void, _onChanged, GtkWidget*)
+    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    SMAP1(MainWindow*, void, _onChanged, GtkWidget*)
 
 };
 

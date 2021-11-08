@@ -12,17 +12,14 @@ public:
 
 private:
 
-    SIGNAL_MAP1(MainWindow*, void, _actionOpen, GtkWidget*)
-    SIGNAL_MAP1(MainWindow*, void, _actionQuit, GtkWidget*)
-
-    SIGNAL_MAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    SMAP1(MainWindow*, void, _actionOpen, GtkWidget*)
+    SMAP1(MainWindow*, void, _actionQuit, GtkWidget*)
+    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
 
     void _createWindow();
-    GtkWidget* _createMenu();
-    GtkWidget* _createToolbar();
-    GtkWidget* _createTextViex();
-
-
+    void _createMenu();
+    void _createToolbar();
+    void _createTextViex();
 
 };
 

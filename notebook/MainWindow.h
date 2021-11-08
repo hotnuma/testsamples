@@ -10,14 +10,14 @@ public:
     MainWindow();
     virtual ~MainWindow();
 
-    SIGNAL_MAP1(MainWindow*, void, onClicked, GtkWidget*)
-
 private:
 
-    SIGNAL_MAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    SMAP1(MainWindow*, void, _onClicked, GtkWidget*)
+    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
 
     void _createWindow();
 
+    GtkWidget *_notebook = nullptr;
 };
 
 #endif // MAINWINDOW_H

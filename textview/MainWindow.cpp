@@ -24,17 +24,9 @@ void MainWindow::_createWindow()
     _grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(_wnd), _grid);
 
-    GtkWidget *menubar = _createMenu();
-    gtk_grid_attach(GTK_GRID(_grid), menubar, 0, _gridrow, 1, 1);
-    ++_gridrow;
-
-    _toolbar = _createToolbar();
-    gtk_grid_attach(GTK_GRID(_grid), _toolbar, 0, _gridrow, 1, 1);
-    ++_gridrow;
-
-    GtkWidget *scrolled = _createTextViex();
-    gtk_grid_attach(GTK_GRID(_grid), scrolled, 0, _gridrow, 1, 1);
-    ++_gridrow;
+    _createMenu();
+    _createToolbar();
+    _createTextViex();
 
     _statusbar = gtk_statusbar_new();
     gtk_grid_attach(GTK_GRID(_grid), _statusbar, 0, _gridrow, 1, 1);
@@ -43,34 +35,36 @@ void MainWindow::_createWindow()
     g_signal_connect(_wnd, "destroy", G_CALLBACK(_onDestroyCB), this);
 }
 
-GtkWidget* MainWindow::_createMenu()
+void MainWindow::_createMenu()
 {
     // Menu bar
     GtkWidget *menubar = gtk_menu_bar_new();
 
     GtkWidget *menu = menuCreateSub(menubar, "File");
 
-    menuAppendItem(menu, "Open...", G_CALLBACK(_actionOpenCB));
-    menuAppendItem(menu, "Quit", G_CALLBACK(_actionQuitCB));
+    menuAppendItem(menu, "Open...", CB(_actionOpen), this);
+    menuAppendItem(menu, "Quit", CB(_actionQuit), this);
 
-    return menubar;
+    gtk_grid_attach(GTK_GRID(_grid), menubar, 0, _gridrow, 1, 1);
+    ++_gridrow;
 }
 
-GtkWidget* MainWindow::_createToolbar()
+void MainWindow::_createToolbar()
 {
-    GtkWidget *toolbar = gtk_toolbar_new();
-    gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
+    _toolbar = gtk_toolbar_new();
+    gtk_toolbar_set_style(GTK_TOOLBAR(_toolbar), GTK_TOOLBAR_ICONS);
 
-    toolbarAppendItem(toolbar, "gtk-new", G_CALLBACK(_actionOpenCB));
-    toolbarAppendItem(toolbar, "gtk-open", G_CALLBACK(_actionOpenCB));
-    toolbarAppendItem(toolbar, "gtk-save", G_CALLBACK(_actionOpenCB));
-    toolbarAppendSeparator(toolbar);
-    toolbarAppendItem(toolbar, "gtk-quit", G_CALLBACK(_actionOpenCB));
+    toolbarAppendItem(_toolbar, "gtk-new", CB(_actionOpen), this);
+    toolbarAppendItem(_toolbar, "gtk-open", CB(_actionOpen), this);
+    toolbarAppendItem(_toolbar, "gtk-save", CB(_actionOpen), this);
+    toolbarAppendSeparator(_toolbar);
+    toolbarAppendItem(_toolbar, "gtk-quit", CB(_actionOpen), this);
 
-    return toolbar;
+    gtk_grid_attach(GTK_GRID(_grid), _toolbar, 0, _gridrow, 1, 1);
+    ++_gridrow;
 }
 
-GtkWidget* MainWindow::_createTextViex()
+void MainWindow::_createTextViex()
 {
     GtkWidget *scrolled = gtk_scrolled_window_new(nullptr, nullptr);
     gtk_widget_set_hexpand(scrolled, true);
@@ -79,7 +73,8 @@ GtkWidget* MainWindow::_createTextViex()
     GtkWidget *view = gtk_text_view_new();
     gtk_container_add(GTK_CONTAINER(scrolled), view);
 
-    return scrolled;
+    gtk_grid_attach(GTK_GRID(_grid), scrolled, 0, _gridrow, 1, 1);
+    ++_gridrow;
 }
 
 void MainWindow::_onDestroy(GtkWidget*)
