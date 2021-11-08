@@ -1,8 +1,6 @@
 #include "MainWindow.h"
 #include <CString.h>
 
-#include <print.h>
-
 MainWindow::MainWindow()
 {
     _createWindow();
@@ -10,29 +8,41 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-    print("delete");
 }
 
 void MainWindow::_createWindow()
 {
     _wnd = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
     gtk_window_set_title(GTK_WINDOW(_wnd), "App Title");
     gtk_window_set_default_size(GTK_WINDOW(_wnd), 400, 300);
     gtk_window_set_position(GTK_WINDOW(_wnd), GTK_WIN_POS_CENTER);
+
     setWindowObject(_wnd, this);
+    g_signal_connect(_wnd, "destroy", CB(_onDestroy), this);
 
     _grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(_wnd), _grid);
 
     _createMenu();
     _createToolbar();
-    _createTextViex();
+
+    _notebook = gtk_notebook_new();
+    gtk_widget_set_hexpand(_notebook, true);
+    gtk_widget_set_vexpand(_notebook, true);
+    gtk_grid_attach(GTK_GRID(_grid), _notebook, 0, _gridrow, 1, 1);
+    ++_gridrow;
+
+    _actionNew();
+
+
 
     _statusbar = gtk_statusbar_new();
     gtk_grid_attach(GTK_GRID(_grid), _statusbar, 0, _gridrow, 1, 1);
     ++_gridrow;
 
-    g_signal_connect(_wnd, "destroy", G_CALLBACK(_onDestroyCB), this);
+
+
 }
 
 void MainWindow::_createMenu()
@@ -64,22 +74,9 @@ void MainWindow::_createToolbar()
     ++_gridrow;
 }
 
-void MainWindow::_createTextViex()
-{
-    GtkWidget *scrolled = gtk_scrolled_window_new(nullptr, nullptr);
-    gtk_widget_set_hexpand(scrolled, true);
-    gtk_widget_set_vexpand(scrolled, true);
-
-    GtkWidget *view = gtk_text_view_new();
-    gtk_container_add(GTK_CONTAINER(scrolled), view);
-
-    gtk_grid_attach(GTK_GRID(_grid), scrolled, 0, _gridrow, 1, 1);
-    ++_gridrow;
-}
-
 void MainWindow::_onDestroy(GtkWidget*)
 {
-    print("destroy");
+    //print("destroy");
 
     bool last = isLastWindow(this);
 

@@ -12,15 +12,18 @@ public:
 
 private:
 
-    SMAP1(MainWindow*, void, _actionOpen, GtkWidget*)
-    SMAP1(MainWindow*, void, _actionQuit, GtkWidget*)
-    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
-
     void _createWindow();
     void _createMenu();
     void _createToolbar();
-    void _createTextViex();
 
+    void _actionNew();
+
+    SMAP1(MainWindow*, void, _onClicked, GtkWidget*)
+    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    SMAP1(MainWindow*, void, _actionOpen, GtkWidget*)
+    SMAP1(MainWindow*, void, _actionQuit, GtkWidget*)
+
+    GtkWidget *_notebook = nullptr;
 };
 
 #endif // MAINWINDOW_H

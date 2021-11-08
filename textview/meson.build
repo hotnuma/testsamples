@@ -8,9 +8,6 @@ project(
     ],
 )
 
-    #'-DGDK_DISABLE_DEPRECATED',
-    #'-DGTK_DISABLE_DEPRECATED',
-
 cpp_args = [
     '-Wall',
     '-fno-rtti',
@@ -18,28 +15,23 @@ cpp_args = [
     '-O2',
 ]
 
-#link_args = ['-Wl,--copy-dt-needed-entries',
-#]
+cc = meson.get_compiler('cpp')
 
-prefix = '/usr/local'
-includedir = prefix + '/include'
-libdir = prefix + '/lib/x86_64-linux-gnu'
-
-tinyui_dep = declare_dependency(
-    include_directories : include_directories(includedir),
-    link_args : [
-        '-L' + libdir,
-        '-l:libtinyui.a'
-    ],
+tinycpp_dep = declare_dependency(
+    dependencies : cc.find_library('tinycpp'),
 )
 
-testgtk_deps = [
+tinyui_dep = declare_dependency(
+    dependencies : cc.find_library('tinyui'),
+)
+
+testgtk_dep = [
     dependency('gtk+-3.0'),
-    dependency('tinycpp', static : true),
+    tinycpp_dep,
     tinyui_dep,
 ]
 
-testgtk_sources = [
+testgtk_src = [
     'main.cpp',
     'MainActions.cpp',
     'MainWindow.cpp',
@@ -48,8 +40,8 @@ testgtk_sources = [
 executable(
     'testgtk',
     cpp_args : cpp_args,
-    dependencies : testgtk_deps,
-    sources : testgtk_sources,
+    dependencies : testgtk_dep,
+    sources : testgtk_src,
 )
 
 

@@ -17,6 +17,8 @@ SOURCES = \
     main.cpp \
 
 DISTFILES = \
+    License.txt \
+    Readme.txt \
     install.sh \
     meson.build \
 
