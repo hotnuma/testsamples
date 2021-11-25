@@ -5,17 +5,18 @@ PKGCONFIG = gtk+-3.0
 DEFINES = GTK
 INCLUDEPATH = /usr/local/include/scintilla
 
-HEADERS += \
-#    MainWindow.h \
+HEADERS = \
+    MainWindow.h \
 
 SOURCES = \
     0Temp.cpp \
-#    MainWindow.cpp \
+    MainActions.cpp \
+    MainWindow.cpp \
     main.cpp \
 
 DISTFILES = \
-    License.txt \
-    Readme.txt \
     install.sh \
+    License.txt \
     meson.build \
+    Readme.txt \
 

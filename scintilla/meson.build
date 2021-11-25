@@ -29,21 +29,33 @@ scintilla_dep = declare_dependency(
     dependencies : cc.find_library('scintilla'),
 )
 
-app_deps = [
+tinycpp_dep = declare_dependency(
+    dependencies : cc.find_library('tinycpp'),
+)
+
+tinyui_dep = declare_dependency(
+    dependencies : cc.find_library('tinyui'),
+)
+
+testgtk_dep = [
     dependency('gtk+-3.0'),
     scintilla_dep,
+    tinycpp_dep,
+    tinyui_dep,
 ]
 
-app_sources = [
+testgtk_src = [
     'main.cpp',
+    'MainActions.cpp',
+    'MainWindow.cpp',
 ]
 
 executable(
     'testgtk',
     cpp_args : cpp_args,
     link_args : link_args,
-    dependencies : app_deps,
-    sources : app_sources,
+    dependencies : testgtk_dep,
+    sources : testgtk_src,
 )
 
 
