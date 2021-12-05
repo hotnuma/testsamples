@@ -1,4 +1,4 @@
 
-Sample GTK programs with libtinyui
+Sample GTK programs using libtinyui
 
 
