@@ -10,12 +10,12 @@ public:
     MainWindow();
     virtual ~MainWindow();
 
-    SMAP2(MainWindow*, int, onSocketInput, GIOChannel*, GIOCondition)
+    CMAP2(MainWindow*, int, onSocketInput, GIOChannel*, GIOCondition)
 
 private:
 
-    SMAP1(MainWindow*, void, _onQuit, GtkWidget*)
-    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    CMAP1(MainWindow*, void, _onQuit, GtkWidget*)
+    CMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
 
     void _createWindow();
     void _createMenu();

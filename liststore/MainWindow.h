@@ -21,8 +21,8 @@ private:
     void _createWindow();
     GtkWidget* _createListView();
 
-    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
-    SMAP1(MainWindow*, void, _onChanged, GtkWidget*)
+    CMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    CMAP1(MainWindow*, void, _onChanged, GtkWidget*)
 
 };
 

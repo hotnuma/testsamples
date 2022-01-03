@@ -18,10 +18,10 @@ private:
 
     void _actionNew();
 
-    SMAP1(MainWindow*, void, _onClicked, GtkWidget*)
-    SMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
-    SMAP1(MainWindow*, void, _actionOpen, GtkWidget*)
-    SMAP1(MainWindow*, void, _actionQuit, GtkWidget*)
+    CMAP1(MainWindow*, void, _onClicked, GtkWidget*)
+    CMAP1(MainWindow*, void, _onDestroy, GtkWidget*)
+    CMAP1(MainWindow*, void, _actionOpen, GtkWidget*)
+    CMAP1(MainWindow*, void, _actionQuit, GtkWidget*)
 
     GtkWidget *_notebook = nullptr;
 };
